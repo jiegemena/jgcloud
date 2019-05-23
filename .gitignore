@@ -1,0 +1,18 @@
+venv/
+.vscode
+js.code-workspace
+services/Log
+Log/
+test/
+test.py
+Log
+# .gitignore
+# Python:
+*.pyc
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
+.publish
