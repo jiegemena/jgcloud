@@ -75,18 +75,25 @@ def request_post(request,key):
         return None
 
 class CApiData:
-    def __init__(self, requests):
-        self.log = jgpycshare.LogTools.LogTools.get_logger('api', 'info')
-
-        self.guid = request_post(requests,'guid')
-        if self.guid is None:
-            self.guid = ''
+    def __init__(self, requests=None,CApiData=None):
+        """
+        - requests=None,
+        - CApiData=None
+        """
+        if CApiData is not None:
+            self = CApiData
         else:
-            self.timespan = request_post(requests,'timespan')
-            self.data = request_post(requests,'data')
-            self.sign = request_post(requests,'sign')
-            self.signtype = request_post(requests,'signtype')
-            self.method = request_post(requests,'method')
+            self.log = jgpycshare.LogTools.LogTools.get_logger('api', 'info')
+
+            self.guid = request_post(requests,'guid')
+            if self.guid is None:
+                self.guid = ''
+            else:
+                self.timespan = request_post(requests,'timespan')
+                self.data = request_post(requests,'data')
+                self.sign = request_post(requests,'sign')
+                self.signtype = request_post(requests,'signtype')
+                self.method = request_post(requests,'method')
 
     def postdata(self, requests):
         self.log.info('timespan=' + self.timespan + '&guid=' + self.guid + '&data=' + self.data + '&sign=' + self.sign + '&signtype=' + self.signtype + '&method=' + self.method)

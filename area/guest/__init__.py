@@ -18,6 +18,7 @@ import uuid
 import entity.Entity
 import jgpycshare.StringTools
 import services.userservice
+import area.guest.deal
 
 guest_bp = Blueprint('guest', __name__, template_folder="templates",
                    static_url_path='', static_folder='static')
@@ -76,11 +77,19 @@ def api(action):
     guid = action
     user = userService.getUserByLoginGuid(guid)
     if user is None:
-            return CApiData.respdata(code=0,data='',msg='errorlogin')
+        return CApiData.respdata(code=0,data='',msg='errorlogin')
     
     CApiData.postdata()
 
     print(CApiData.guid)
+
+    if CApiData.method == 'register':
+        resp = area.guest.deal.register()
+        return CApiData.respdata(code=1,data='',msg=resp)
+
+    if CApiData.method == 'unregister':
+        resp = area.guest.deal.register()
+        return CApiData.respdata(code=1,data='',msg=resp)
 
 
     return 'welcome web api!'
